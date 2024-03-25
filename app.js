@@ -6,30 +6,78 @@ La letra "o" es convertida para "ober"
 La letra "u" es convertida para "ufat"
 */
 
+//Declaramos las variables
+
+let ingresadoArea = document.querySelector(".text-area");
+let secundarioArea = document.querySelector(".mensaje"); 
+let cambiarCopiar = document.querySelector(".copiar"); 
+
+//!Revisamos texto ingresado
+function revisarTexto(cadena){
+
+    let chCode = 0;
+    let resultado = true;
+    let cadenaVacia = "";
+
+    //Minusculas
+    for (let i=0; i<(cadena.length); i++){
+        chCode = cadena.charCodeAt(i);
+        if (((chCode < 97) || (chCode > 122)) && (chCode != 164) && (chCode != 32) && (chCode != 10)){
+            alert("Debes escribir solo minusculas y sin acentos");
+            resultado = false;
+            break;
+        }
+    }
+    
+    //No en blanco
+    for (let i=0; i<(cadena.length); i++){
+        cadenaVacia = cadenaVacia + " ";
+    }
+    if (cadena == cadenaVacia){
+        alert("Debes escribir algún texto");
+        resultado = false;
+    }
+    
+    return(resultado);
+}
 
 function encriptar(){
-    var texto = document.getElementById("textArea").value.toLowerCase();
-    var textoCifrado = texto.replace(/e/igm,"enter");
-    var textoCifrado = textoCifrado.replace(/o/igm,"ober");
-    var textoCifrado = textoCifrado.replace(/i/igm,"imes");
-    var textoCifrado = textoCifrado.replace(/a/igm,"ai");
-    var textoCifrado = textoCifrado.replace(/u/igm,"ufat");
-    
-    document.getElementById("mensaje").innerHTML = textoCifrado;
-    btnCopiar();
- 
+    let ingresado = ingresadoArea.value;
+        
+    if (revisarTexto(ingresado) == true){
+        let secundario = ingresado.replaceAll("e","enter");
+        secundario = secundario.replaceAll("i","imes");
+        secundario = secundario.replaceAll("a","ai");
+        secundario = secundario.replaceAll("o", "ober");
+        secundario = secundario.replaceAll("u", "ufat");
+
+        secundarioArea.value = secundario;
+        btnCopiar();
+    } 
 }
 
 function desencriptar(){
-    var texto = document.getElementById("textArea").value.toLowerCase();
-    var textoCifrado = texto.replace(/enter/igm,"e");
-    var textoCifrado = textoCifrado.replace(/ober/igm,"o");
-    var textoCifrado = textoCifrado.replace(/imes/igm,"i");
-    var textoCifrado = textoCifrado.replace(/ai/igm,"a");
-    var textoCifrado = textoCifrado.replace(/ufat/igm,"u");
-    
-    document.getElementById("mensaje").innerHTML = textoCifrado;   
+    let ingresado = ingresadoArea.value;
+        
+    if (revisarTexto(ingresado) == true) {
+            
+        let secundario = ingresado.replaceAll("ufat", "u");
+        secundario = secundario.replaceAll("ober", "o");
+        secundario = secundario.replaceAll("ai", "a");
+        secundario = secundario.replaceAll("imes", "i");
+        secundario = secundario.replaceAll("enter", "e");
+        
+        secundarioArea.value = secundario;
+        
+    }
 }
+
+function borrar(){
+    ingresadoArea.value = "";
+    secundarioArea.value = "";
+    cambiarCopiar.innerHTML = "Copiar";
+}
+
 
 function copiar() {
     let inputText = document.getElementById("mensaje");
@@ -43,7 +91,6 @@ function copiar() {
 
 }
 
-
 function btnCopiar() {
     document.getElementById("copiar").removeAttribute("disabled");
     document.getElementById("copiar").innerHTML= "Copiar";
@@ -53,16 +100,5 @@ function textoCopiado(){
     document.getElementById("copiar").innerHTML = "Texto copiado";
 }
 
-document.getElementById("textArea").addEventListener("keypress",verificar);
-	function verificar(e) {
- 
-		// comprovamos con una expresion regular que el caracter pulsado sea
-		// una letra o un espacio
-		if(e.key.match(/[a-zñ\s]/i)===null) {
- 
-			// Si la tecla pulsada no es la correcta, eliminado la pulsación
-			e.preventDefault();
-		}
-	}
 
    

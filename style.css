@@ -76,6 +76,16 @@ main{
     width: 328px;
 }
 
+.borrar{
+    background-color: #0a3855;
+    border: 1px solid #0a3871;
+    border-radius: 24px;
+    color: white;
+    cursor: pointer;
+    height: 67px;
+    width: 328px;
+}
+
 .btn-desencriptar{
     background: #d8dfe8;
     border: 1px solid #0a3871;
@@ -132,7 +142,6 @@ footer{
 
     .text-area{
         width: 100%;
-        font-size: 20px;
         height: auto;
     }
 
@@ -144,6 +153,15 @@ footer{
         width: 100%;
     }
     .btn-encriptar{
+        margin: auto;
+        margin-left: 18px;
+        width:90%;
+    }
+
+    .borrar{
+        width: 100%;
+    }
+    .borrar{
         margin: auto;
         margin-left: 18px;
         width:90%;
